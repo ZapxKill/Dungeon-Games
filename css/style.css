@@ -1,0 +1,91 @@
+html {
+    box-sizing: border-box;
+    font-family: "Noto Sans TC", sans-serif;
+    height: 100%;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+body{
+    background-color: #202020;
+    margin: 0;
+    height: 100%;
+}
+#ui-bar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 0;
+    width: 15%;
+    height: 100%;
+    padding-right: 1%;
+    background-color: #202020;
+    
+    border-right: 3px solid gray;
+}
+#ui-body{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-left: 2%;
+}
+#minimap{
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    height: auto;
+    flex: 0 0 auto;
+    background-color: gray;
+}
+#stats{
+    flex: 0 0 auto;
+    width: 100%;
+}
+.stats-bar{
+    border-top: 3px solid;
+}
+.stats-label{
+    color:white;
+    margin: 0;
+}
+#health{
+    width: 100%;
+    border-color: red;
+}
+#stamina{
+    border-color: green;
+}
+#mp{
+    border-color: blue;
+}
+#backpack{
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.5em;
+    overflow-y: auto;
+    padding: 0.5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    flex: 1 1 auto;
+    background-color: #404040;
+}
+.backpack-item{
+    aspect-ratio: 1;
+    background-color: gray;
+}
+#text-area{
+    display: flex;
+    flex-direction: column;
+    margin-left: 15%;
+    padding: 5% 5% 0 5%;
+}
+#description{
+    flex: 1 1 auto;
+}
+#command-area{
+    flex: 1 1 auto;
+}
+
+.text{
+    color: white;
+}
