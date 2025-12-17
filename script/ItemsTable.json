@@ -1,0 +1,41 @@
+[
+    {
+        "itemID": "heal_posion",
+        "usage": "player_stats_item",
+        "itemName":"Heal Posion",
+        "description": "Heal 10 HP",
+        "amount": 0,
+        "stats":
+        {
+            "health": 10,
+            "stamina": 0,
+            "mp": 0
+        }
+    },
+    {
+        "itemID": "stamina_posion",
+        "usage": "player_stats_item",
+        "itemName":"Stamina Posion",
+        "description": "Recover 10 stamina",
+        "amount": 0,
+        "stats":
+        {
+            "health": 0,
+            "stamina": 10,
+            "mp": 0
+        }
+    },
+    {
+        "itemID": "mp_posion",
+        "usage": "player_stats_item",
+        "itemName":"MP Posion",
+        "description": "Recover 10 MP",
+        "amount": 0,
+        "stats":
+        {
+            "health": 0,
+            "stamina": 0,
+            "mp": 10
+        }
+    }
+]
