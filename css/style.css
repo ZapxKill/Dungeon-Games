@@ -1,10 +1,16 @@
+@font-face {
+    font-family: "cubic11";
+    src: url("../font/Cubic_11.woff2");
+}
+
 html {
     box-sizing: border-box;
-    font-family: "Noto Sans TC", sans-serif;
+    font-family: "cubic11", sans-serif;
     height: 100%;
 }
 *, *::before, *::after {
     box-sizing: inherit;
+    font-family: "cubic11", sans-serif;
 }
 body{
     background-color: #202020;
@@ -22,12 +28,44 @@ body{
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
+.nav-bar{
+    position: absolute;
+    top: -50px;
+    right: 0;
+    width: 80%;
+    color: white;
+    background-color: gray;
+    transition: top 0.2s;
+}
+
+.nav-bar:hover{
+    top: 0px;
+}
+
+.nav-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-content: center;
+}
+
+.nav-item{
+    list-style: none;
+    margin-right: 5%;
+}
+
+.nav-text{
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+}
+
 #ui-bar{
     position: absolute;
     top: 0;
     left: 0;
     margin-left: 0;
-    width: 15%;
+    width: 200px;
     height: 100%;
     padding-right: 1%;
     background-color: #202020;
@@ -62,12 +100,15 @@ body{
 #health{
     width: 100%;
     border-color: red;
+    transition: width 0.5s;
 }
 #stamina{
     border-color: green;
+    transition: width 0.5s;
 }
 #mp{
     border-color: blue;
+    transition: width 0.5s;
 }
 #backpack{
     display: grid;
@@ -94,10 +135,10 @@ body{
 .backpack-item:hover{
     background-color: lightgray;
 }
-#text-area{
+#game-area{
     display: flex;
     flex-direction: column;
-    margin-left: 15%;
+    margin-left: 200px;
     padding: 5% 5% 0 5%;
 }
 #description{

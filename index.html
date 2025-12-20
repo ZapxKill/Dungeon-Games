@@ -8,10 +8,19 @@
     <title>Dungeon Game</title>
     <script type="module" src="script/gameController.js"></script>
 </head>
+<nav>
+    <div class="nav-bar">
+        <ul class="nav-list">
+            <li class="nav-item"><a class="nav-text" href="">首頁</a></li>
+            <li class="nav-item"><a class="nav-text" href="">遊戲</a></li>
+            <li class="nav-item"><a class="nav-text" href="">統計</a></li>
+        </ul>
+    </div>
+</nav>
 <body>
     <div id="ui-bar">
         <div id="ui-body">
-            <canvas id="minimap" width="300" height="300"></canvas>
+            <canvas id="minimap" width="200" height="200"></canvas>
             <div id="stats">
                 <p class="stats-label noselect" id="health-label">Health</p>
                 <div class="stats-bar" id="health"></div>
@@ -24,9 +33,9 @@
             </div>
         </div>
     </div>
-    <div id="text-area">
-        <div id="description">
-             <p class="text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo veniam similique amet, adipisci voluptatem ut sit numquam! Quae accusantium facilis iste ducimus velit tempore, aperiam quo placeat expedita error nostrum.</p>
+    <div id="game-area">
+        <div>
+             <p class="text" id="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo veniam similique amet, adipisci voluptatem ut sit numquam! Quae accusantium facilis iste ducimus velit tempore, aperiam quo placeat expedita error nostrum.</p>
         </div>
         <div id="command-area">
         <button id="up">up</button>

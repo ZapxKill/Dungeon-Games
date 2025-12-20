@@ -1,8 +1,9 @@
 [
     {
-        "itemID": "heal_posion",
+        "itemID": "heal_posion_s",
         "usage": "player_stats_item",
-        "itemName":"Heal Posion",
+        "itemName":"Heal Posion Small",
+        "image": "../image/items/potion_hp_s.png",
         "description": "Heal 10 HP",
         "amount": 0,
         "stats":
@@ -13,9 +14,10 @@
         }
     },
     {
-        "itemID": "stamina_posion",
+        "itemID": "stamina_posion_s",
         "usage": "player_stats_item",
-        "itemName":"Stamina Posion",
+        "itemName":"Stamina Posion Small",
+        "image": "../image/items/potion_sp_s.png",
         "description": "Recover 10 stamina",
         "amount": 0,
         "stats":
@@ -26,9 +28,10 @@
         }
     },
     {
-        "itemID": "mp_posion",
+        "itemID": "mp_posion_s",
         "usage": "player_stats_item",
-        "itemName":"MP Posion",
+        "itemName":"MP Posion Small",
+        "image": "../image/items/potion_mp_s.png",
         "description": "Recover 10 MP",
         "amount": 0,
         "stats":
