@@ -37,6 +37,7 @@ export class Player{
     moveRoom(direction){
         if(this.attribute.stamina >= 5 && this.currentRoom.connects[direction] != null){
             this.currentRoom = this.currentRoom.connects[direction]
+            this.currentRoom.playerSeen = true
             this.position = this.currentRoom.position
             this.attribute.stamina-=5
             drawMap(this.currentRoom, this)

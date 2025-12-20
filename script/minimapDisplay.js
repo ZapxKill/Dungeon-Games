@@ -57,7 +57,8 @@ function drawRectRoom(room, player, drawed=new Set()){
     }
 }
 function drawRoom(room, player, drawed=new Set()){
-    drawed.add(`${room.position[0]},${room.position[1]}`) 
+    if(room.playerSeen){
+        drawed.add(`${room.position[0]},${room.position[1]}`) 
     let index = -1
     for(let i=0;i<room.connects.length;i++){  
         if(room.connects[i] != null){
@@ -81,9 +82,9 @@ function drawRoom(room, player, drawed=new Set()){
             index += 2 ** i
         }
     }
-    console.log(`pos: ${room.position} img: ${roomImages[index]} index: ${index}`)
-    console.log(room.connects)
     drawImage(roomImageFolderPath + roomImages[index], cx + (room.position[0] - player.position[0]) * gap, cy + (room.position[1] - player.position[1]) * gap)    
+    }
+    
 }
 
 
