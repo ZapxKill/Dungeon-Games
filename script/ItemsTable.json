@@ -4,6 +4,8 @@
         "usage": "player_stats_item",
         "itemName":"Heal Posion Small",
         "image": "../image/items/potion_hp_s.png",
+        "hImage": "../image/items/potion_hp_s_sel.png",
+        "cImage": "../image/items/potion_hp_s_cli.png",
         "description": "Heal 10 HP",
         "amount": 0,
         "stats":
@@ -18,6 +20,8 @@
         "usage": "player_stats_item",
         "itemName":"Stamina Posion Small",
         "image": "../image/items/potion_sp_s.png",
+        "hImage": "../image/items/potion_sp_s_sel.png",
+        "cImage": "../image/items/potion_sp_s_cli.png",
         "description": "Recover 10 stamina",
         "amount": 0,
         "stats":
@@ -32,6 +36,8 @@
         "usage": "player_stats_item",
         "itemName":"MP Posion Small",
         "image": "../image/items/potion_mp_s.png",
+        "hImage": "../image/items/potion_mp_s_sel.png",
+        "cImage": "../image/items/potion_mp_s_cli.png",
         "description": "Recover 10 MP",
         "amount": 0,
         "stats":

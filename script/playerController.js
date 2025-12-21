@@ -102,12 +102,23 @@ export class Player{
         this.inventory.forEach(item => {
             /** @type {HTMLSpanElement} */
             let newItem = document.createElement("div")
+            let itemImage = document.createElement("img")
             let itemAmount = document.createElement("span")
             itemAmount.textContent = `x${item.amount}`
+            itemImage.src = item.image
+            itemImage.className = "item-img"
             newItem.className = `backpack-item ${item.itemID}`
             itemAmount.className = "item-amount noselect"
             newItem.appendChild(itemAmount)
-            newItem.addEventListener("click", this.useItem.bind(this, item))
+            newItem.appendChild(itemImage)
+            itemImage.addEventListener("click", this.useItem.bind(this, item))
+            itemImage.addEventListener("mouseover", function(){
+                itemImage.src = item.hImage
+            })
+            itemImage.addEventListener("mouseout", function(){
+                itemImage.src = item.image
+            })
+
             backpack.appendChild(newItem)
         })
     }
