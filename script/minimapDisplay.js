@@ -12,6 +12,17 @@ const roomImageFolderPath = "image/minimap/"
 const roomImages = ["roomU.png", "roomR.png", "roomUR.png", "roomD.png", "roomUD.png", "roomRD.png", "roomURD.png", "roomL.png", "roomUL.png", "roomRL.png", "roomURL.png", "roomDL.png", "roomUDL.png", "roomRDL.png", "roomURDL.png"]
 ctx.fillStyle = "white"
 
+function preloadImage(url)
+{
+    let img = new Image().src = url;
+}
+
+export function preloadRoomImages(){
+    for(let i=0;i<roomImages.length;i++){
+        preloadImage(roomImageFolderPath+roomImages[i])
+    }
+}
+
 function drawCenterRect(x, y, w, h) {
     ctx.fillRect(x - w / 2, y - h / 2, w, h);
 }

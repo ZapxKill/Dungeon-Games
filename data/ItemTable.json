@@ -46,5 +46,101 @@
             "stamina": 0,
             "mp": 10
         }
+    },
+    {
+        "itemID": "heal_posion_m",
+        "usage": "player_stats_item",
+        "itemName":"治療藥水 中",
+        "image": "image/items/potion_hp_m.png",
+        "hImage": "image/items/potion_hp_m_sel.png",
+        "cImage": "image/items/potion_hp_m_cli.png",
+        "description": "Heal 20 HP",
+        "amount": 0,
+        "stats":
+        {
+            "health": 20,
+            "stamina": 0,
+            "mp": 0
+        }
+    },
+    {
+        "itemID": "stamina_posion_m",
+        "usage": "player_stats_item",
+        "itemName":"體力藥水 中",
+        "image": "image/items/potion_sp_m.png",
+        "hImage": "image/items/potion_sp_m_sel.png",
+        "cImage": "image/items/potion_sp_m_cli.png",
+        "description": "Recover 20 stamina",
+        "amount": 0,
+        "stats":
+        {
+            "health": 0,
+            "stamina": 20,
+            "mp": 0
+        }
+    },
+    {
+        "itemID": "mp_posion_m",
+        "usage": "player_stats_item",
+        "itemName":"魔力藥水 中",
+        "image": "image/items/potion_mp_m.png",
+        "hImage": "image/items/potion_mp_m_sel.png",
+        "cImage": "image/items/potion_mp_m_cli.png",
+        "description": "Recover 20 MP",
+        "amount": 0,
+        "stats":
+        {
+            "health": 0,
+            "stamina": 0,
+            "mp": 20
+        }
+    },
+    {
+        "itemID": "heal_posion_L",
+        "usage": "player_stats_item",
+        "itemName":"治療藥水 大",
+        "image": "image/items/potion_hp_L.png",
+        "hImage": "image/items/potion_hp_L_sel.png",
+        "cImage": "image/items/potion_hp_L_cli.png",
+        "description": "Heal 30 HP",
+        "amount": 0,
+        "stats":
+        {
+            "health": 30,
+            "stamina": 0,
+            "mp": 0
+        }
+    },
+    {
+        "itemID": "stamina_posion_L",
+        "usage": "player_stats_item",
+        "itemName":"體力藥水 大",
+        "image": "image/items/potion_sp_L.png",
+        "hImage": "image/items/potion_sp_L_sel.png",
+        "cImage": "image/items/potion_sp_L_cli.png",
+        "description": "Recover 30 stamina",
+        "amount": 0,
+        "stats":
+        {
+            "health": 0,
+            "stamina": 30,
+            "mp": 0
+        }
+    },
+    {
+        "itemID": "mp_posion_L",
+        "usage": "player_stats_item",
+        "itemName":"魔力藥水 大",
+        "image": "image/items/potion_mp_L.png",
+        "hImage": "image/items/potion_mp_L_sel.png",
+        "cImage": "image/items/potion_mp_L_cli.png",
+        "description": "Recover 30 MP",
+        "amount": 0,
+        "stats":
+        {
+            "health": 0,
+            "stamina": 0,
+            "mp": 30
+        }
     }
 ]

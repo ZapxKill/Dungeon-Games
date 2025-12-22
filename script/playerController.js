@@ -28,9 +28,6 @@ export class Player{
         drawMap(this.currentRoom, this)
         this.commandAreaUpdate()
         this.playerStatsUpdate()
-        this.getItem(ItemTable.find(item => item.itemID == "stamina_posion_s"))
-        this.getItem(ItemTable.find(item => item.itemID == "heal_posion_s"))
-        this.getItem(ItemTable.find(item => item.itemID == "mp_posion_s"))
     }
     statsOverflowCheck(){
         if(this.attribute.health > this.attribute.maxHealth){
