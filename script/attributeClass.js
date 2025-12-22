@@ -17,6 +17,7 @@ export class Attribute {
             this.setup()
             return
         }
+
         this.setup()
     }
 

@@ -1,4 +1,3 @@
-import ItemsTable from "../data/ItemsTable.json" with {type: "json"}
 import TextTable from "../data/TextTable.json" with {type: "json"}
 
 const description = document.getElementById("description")

@@ -1,4 +1,4 @@
-import ItemsTable from "../data/ItemsTable.json" with {type: "json"}
+import ItemTable from "../data/ItemTable.json" with {type: "json"}
 import { drawMap } from "./minimapDisplay.js"
 import { showRoomText, showRandomText, showText } from "./StoryTextController.js"
 import { Attribute } from "./attributeClass.js"
@@ -25,10 +25,12 @@ export class Player{
         this.position[1] = room.position[1]
         this.currentRoom = room
         showRandomText(TextTable["new-game"])
-        this.UIupdate()
-        this.getItem(ItemsTable.find(item => item.itemID == "stamina_posion_s"))
-        this.getItem(ItemsTable.find(item => item.itemID == "heal_posion_s"))
-        this.getItem(ItemsTable.find(item => item.itemID == "mp_posion_s"))
+        drawMap(this.currentRoom, this)
+        this.commandAreaUpdate()
+        this.playerStatsUpdate()
+        this.getItem(ItemTable.find(item => item.itemID == "stamina_posion_s"))
+        this.getItem(ItemTable.find(item => item.itemID == "heal_posion_s"))
+        this.getItem(ItemTable.find(item => item.itemID == "mp_posion_s"))
     }
     statsOverflowCheck(){
         if(this.attribute.health > this.attribute.maxHealth){
@@ -49,7 +51,7 @@ export class Player{
             this.attribute.stamina-=5
             drawMap(this.currentRoom, this)
             showRoomText(this.currentRoom)
-            this.UIupdate()
+            this.playerStatsUpdate()
             this.commandAreaUpdate()
             return true
         } 
@@ -61,7 +63,7 @@ export class Player{
         }
         return false   
     }
-    UIupdate(){
+    playerStatsUpdate(){
         this.statsOverflowCheck()
         HealthBar.style.width = `${this.attribute.health/this.attribute.maxHealth*100}%`
         StaminaBar.style.width = `${this.attribute.stamina/this.attribute.MaxStamina*100}%`
@@ -82,7 +84,7 @@ export class Player{
         else{
             showText("你決定在這裡休息一下")
         }
-        this.UIupdate()
+        this.playerStatsUpdate()
     }
     useItem(item){
         console.log(`use ${JSON.stringify(item)}`)
@@ -95,7 +97,7 @@ export class Player{
                 this.inventory.splice(this.inventory.indexOf(item), 1)
             }
         }
-        this.UIupdate()
+        this.playerStatsUpdate()
         this.inventoryUpdate()
     }
     getItem(item){
@@ -180,7 +182,7 @@ export class Player{
     }
 
     openCreate(){
-        let item = ItemsTable[Math.floor(Math.random() * ItemsTable.length)]
+        let item = ItemTable[Math.floor(Math.random() * ItemTable.length)]
         showText(`你打開箱子獲得了 ${item.itemName}`)
         this.getItem(item)
         this.playerState = "searching"
