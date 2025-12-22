@@ -28,6 +28,8 @@ body{
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
+
+
 .nav-bar{
     position: absolute;
     top: -50px;
@@ -143,19 +145,69 @@ body{
 #game-area{
     position: absolute;
     top: 10%;
-    left: 250px;
+    left: 300px;
+    width: calc(100% - 300px);
+    height: 80%;
     display: flex;
     flex-direction: column;
-    padding: 5% 5% 0 5%;
+    background-color: #404040;
+    padding: 5% 5% 5% 5%;
+}
+#description-box{
+    background-color: #202020;
+    height: 30%;
+    margin-bottom: 1.5em;
+    padding: 1%;
 }
 #description{
-    flex: 1 1 auto;
+    flex: 0 1 auto;
 }
-#command-area{
-    flex: 1 1 auto;
+.command-area{
+    flex: 0 1 auto;
+    padding: 1% 0 0 0;
+    background-color: #202020;
+}
+
+.command-button{
+    background-color: #404040;
+    color: white;
+    width: 100px;
+    height: 50px;
+    margin: 1em;
+    cursor: pointer;
+}
+
+.movement-buttons{
+    display: grid;
+    grid-template-areas: 
+    ". up ."
+    "left down right";
+    width: 400px;
+}
+
+
+#movement-up{
+    grid-area: up;
+}
+
+#movement-left{
+    grid-area: left;
+}
+
+#movement-down{
+    grid-area: down;
+}
+
+#movement-right{
+    grid-area: right;
 }
 
 .text{
     color: white;
 }
+
+.hidden{
+    display: none;
+}
+
 

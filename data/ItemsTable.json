@@ -2,7 +2,7 @@
     {
         "itemID": "heal_posion_s",
         "usage": "player_stats_item",
-        "itemName":"Heal Posion Small",
+        "itemName":"治療藥水 小",
         "image": "../image/items/potion_hp_s.png",
         "hImage": "../image/items/potion_hp_s_sel.png",
         "cImage": "../image/items/potion_hp_s_cli.png",
@@ -18,7 +18,7 @@
     {
         "itemID": "stamina_posion_s",
         "usage": "player_stats_item",
-        "itemName":"Stamina Posion Small",
+        "itemName":"體力藥水 小",
         "image": "../image/items/potion_sp_s.png",
         "hImage": "../image/items/potion_sp_s_sel.png",
         "cImage": "../image/items/potion_sp_s_cli.png",
@@ -34,7 +34,7 @@
     {
         "itemID": "mp_posion_s",
         "usage": "player_stats_item",
-        "itemName":"MP Posion Small",
+        "itemName":"魔力藥水 小",
         "image": "../image/items/potion_mp_s.png",
         "hImage": "../image/items/potion_mp_s_sel.png",
         "cImage": "../image/items/potion_mp_s_cli.png",

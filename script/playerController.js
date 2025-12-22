@@ -1,23 +1,30 @@
-import ItemsTable from "./ItemsTable.json" with {type: "json"}
+import ItemsTable from "../data/ItemsTable.json" with {type: "json"}
 import { drawMap } from "./minimapDisplay.js"
-import { showRoomText, showText } from "./StoryTextController.js"
+import { showRoomText, showRandomText, showText } from "./StoryTextController.js"
 import { Attribute } from "./attributeClass.js"
+import { createElement } from "./UIController.js"
+import { CommandAreas } from "./CommandAreas.js"
+import TextTable from "../data/TextTable.json" with {type: "json"}
+import { generate } from "./mapGenerator.js"
 const HealthBar = document.getElementById("health")
 const StaminaBar = document.getElementById("stamina")
 const MpBar = document.getElementById("mp")
 const HealthLabel = document.getElementById("health-label")
 const StaminaLabel = document.getElementById("stamina-label")
 const MpLabel = document.getElementById("mp-label")
+const commandArea = document.getElementById("game-area")
 
 export class Player{
     position = [0,0]
     attribute = new Attribute()
     inventory = []
+    playerState = "searching"
+    dungeonLayer = 1
     constructor(room){
         this.position[0] = room.position[0]
         this.position[1] = room.position[1]
         this.currentRoom = room
-        showText("你醒了過來，發現自己在一座地下迷宮中。")
+        showRandomText(TextTable["new-game"])
         this.UIupdate()
         this.getItem(ItemsTable.find(item => item.itemID == "stamina_posion_s"))
         this.getItem(ItemsTable.find(item => item.itemID == "heal_posion_s"))
@@ -43,6 +50,7 @@ export class Player{
             drawMap(this.currentRoom, this)
             showRoomText(this.currentRoom)
             this.UIupdate()
+            this.commandAreaUpdate()
             return true
         } 
         else if(this.currentRoom.connects[direction] != null){
@@ -63,9 +71,17 @@ export class Player{
         MpLabel.textContent = `MP: ${this.attribute.mp}/${this.attribute.MaxMp}`
 
     }
-    takeBreak(){
+    takeRest(){
         this.attribute.stamina += 5
-        showText("你決定在這裡休息一下")
+        let roomContentChance = Math.random()
+        if(roomContentChance < 0.4){
+            this.currentRoom.roomContent = "enemy-room"
+            showRandomText(TextTable["rest-encounter-enemy"])
+            this.commandAreaUpdate()
+        }
+        else{
+            showText("你決定在這裡休息一下")
+        }
         this.UIupdate()
     }
     useItem(item){
@@ -82,14 +98,14 @@ export class Player{
         this.UIupdate()
         this.inventoryUpdate()
     }
-    getItem(gItem){
-        let item
-        if(item = this.inventory.find(item => item.itemID == gItem.itemID)){
-            item.amount += 1
+    getItem(item){
+        let bItem
+        if(bItem = this.inventory.find(bItem => bItem.itemID == item.itemID)){
+            bItem.amount += 1
         }
         else{
-            gItem.amount = 1
-            this.inventory.push(gItem)
+            item.amount = 1
+            this.inventory.push(item)
         }
         this.inventoryUpdate()
     }
@@ -122,4 +138,54 @@ export class Player{
             backpack.appendChild(newItem)
         })
     }
+    commandAreaUpdate(){
+        while(commandArea.lastChild.id != "description-box"){
+            commandArea.removeChild(commandArea.lastChild)
+        }
+        if(this.playerState == "searching"){
+            switch(this.currentRoom.roomContent){
+            case "empty-room":
+                commandArea.appendChild(createElement(CommandAreas.movement))
+                break
+            case "enemy-room":
+                commandArea.appendChild(createElement(CommandAreas.encounterEnemy))
+                break
+            case "crate-room":
+                commandArea.appendChild(createElement(CommandAreas.movement))
+                commandArea.appendChild(createElement(CommandAreas.findCrate))
+                break
+            case "exit-room":
+                commandArea.appendChild(createElement(CommandAreas.movement))
+                commandArea.appendChild(createElement(CommandAreas.findExit))
+                break
+            default:
+                commandArea.appendChild(createElement(CommandAreas.movement))
+                break
+            }
+        }
+        else if(this.playerState == "battle"){
+            commandArea.appendChild(createElement(CommandAreas.battle))
+        }
+        else if(this.playerState == "crate"){
+            commandArea.appendChild(createElement(CommandAreas.crate))
+        }
+        
+    }
+    enterNewLevel(){
+        this.position = [0,0]
+        this.currentRoom = generate()
+        this.dungeonLayer++
+        drawMap(this.currentRoom, this)
+        this.commandAreaUpdate()
+    }
+
+    openCreate(){
+        let item = ItemsTable[Math.floor(Math.random() * ItemsTable.length)]
+        showText(`你打開箱子獲得了 ${item.itemName}`)
+        this.getItem(item)
+        this.playerState = "searching"
+        this.currentRoom.roomContent = "empty-room"
+        this.commandAreaUpdate()
+    }
+    
 }

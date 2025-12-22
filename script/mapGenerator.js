@@ -1,5 +1,3 @@
-import ItemsTable from "./ItemsTable.json" with {type: "json"}
-
 export let TargetRoomAmount = 20
 export let rooms = []
 export let seen = new Set()
@@ -8,24 +6,24 @@ export class Room {
     connects = [null,null,null,null]
     position = [0,0]
     playerSeen = false
-    roomContent = 0 //0: empty, 1: enemy, 2: loot 3: exit
+    roomContent = "empty-room" //0: empty, 1: enemy, 2: loot 3: exit
     constructor(connectedDirection, connectedRoom){
         if(connectedDirection == null || connectedRoom == null){
             seen.add(`${this.position[0]},${this.position[1]}`)
             this.playerSeen = true
-            this.roomContent = 0
+            this.roomContent = "empty-room"
             roomAmount += 1
             return
         }
         let roomContentChance = Math.random()
         if(roomContentChance < 0.6){
-            this.roomContent = 0
+            this.roomContent = "empty-room"
         }
         else if(roomContentChance < 0.8){
-            this.roomContent = 1
+            this.roomContent = "enemy-room"
         }
         else{
-            this.roomContent = 2
+            this.roomContent = "crate-room"
         }
         switch(connectedDirection){
             case 0:
@@ -127,6 +125,6 @@ export function generate(){
     while(tmp == 0){
         tmp = Math.floor(Math.random() * rooms.length)
     }
-    rooms[tmp].roomContent = 3
+    rooms[tmp].roomContent = "exit-room"
     return root
 }
