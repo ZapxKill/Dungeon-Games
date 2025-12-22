@@ -8,7 +8,7 @@ const gap = 48
 const size = 40
 const playerSize = 16
 const hallWidth = 24
-const roomImageFolderPath = "./image/minimap/"
+const roomImageFolderPath = "/image/minimap/"
 const roomImages = ["roomU.png", "roomR.png", "roomUR.png", "roomD.png", "roomUD.png", "roomRD.png", "roomURD.png", "roomL.png", "roomUL.png", "roomRL.png", "roomURL.png", "roomDL.png", "roomUDL.png", "roomRDL.png", "roomURDL.png"]
 ctx.fillStyle = "white"
 
