@@ -1,7 +1,6 @@
 import ItemTable from "../data/ItemTable.json" with {type: "json"}
 import { drawMap } from "./minimapDisplay.js"
 import { showRoomText, showRandomText, showText } from "./StoryTextController.js"
-import { Attribute } from "./attributeClass.js"
 import { createElement } from "./UIController.js"
 import { CommandAreas } from "./CommandAreas.js"
 import TextTable from "../data/TextTable.json" with {type: "json"}
@@ -13,13 +12,16 @@ const HealthLabel = document.getElementById("health-label")
 const StaminaLabel = document.getElementById("stamina-label")
 const MpLabel = document.getElementById("mp-label")
 const commandArea = document.getElementById("game-area")
+const mazeLevelLabel = document.getElementById("maze-level")
+
 
 export class Player{
     position = [0,0]
-    attribute = new Attribute()
+    attribute = new PlayerAttribute()
     inventory = []
     playerState = "searching"
     dungeonLayer = 1
+    selectedItem = null
     constructor(room){
         this.position[0] = room.position[0]
         this.position[1] = room.position[1]
@@ -36,7 +38,7 @@ export class Player{
         if(this.attribute.stamina > this.attribute.MaxStamina){
             this.attribute.stamina = this.attribute.MaxStamina
         }
-        if(this.attribute.mp> this.attribute.MaxMp){
+        if(this.attribute.mp  > this.attribute.MaxMp){
             this.attribute.mp = this.attribute.MaxMp
         }
     }
@@ -64,7 +66,7 @@ export class Player{
         this.statsOverflowCheck()
         HealthBar.style.width = `${this.attribute.health/this.attribute.maxHealth*100}%`
         StaminaBar.style.width = `${this.attribute.stamina/this.attribute.MaxStamina*100}%`
-        MpBar.style.widows = `${this.attribute.mp/this.attribute.MaxMp*100}%`
+        MpBar.style.width = `${this.attribute.mp/this.attribute.MaxMp*100}%`
         HealthLabel.textContent = `Health: ${this.attribute.health}/${this.attribute.maxHealth}`
         StaminaLabel.textContent = `Stamina: ${this.attribute.stamina}/${this.attribute.MaxStamina}`
         MpLabel.textContent = `MP: ${this.attribute.mp}/${this.attribute.MaxMp}`
@@ -84,7 +86,6 @@ export class Player{
         this.playerStatsUpdate()
     }
     useItem(item){
-        console.log(`use ${JSON.stringify(item)}`)
         if(item.usage == "player_stats_item"){
             this.attribute.health += item.stats.health
             this.attribute.stamina += item.stats.stamina
@@ -95,7 +96,7 @@ export class Player{
             }
         }
         this.playerStatsUpdate()
-        this.inventoryUpdate()
+        this.inventoryUpdate(this)
     }
     getItem(item){
         let bItem
@@ -106,11 +107,23 @@ export class Player{
             item.amount = 1
             this.inventory.push(item)
         }
-        this.inventoryUpdate()
+        this.inventoryUpdate(this)
     }
-    inventoryUpdate(){
+    inventoryUpdate(p){
         /** @type {HTMLDivElement} */
         const backpack = document.getElementById("backpack")
+        /** @type {HTMLDivElement} */
+        const commandBox = document.getElementById("item-command-box")
+        document.getElementById("use-item")?.addEventListener("mousedown", function(){
+            if(p.selectedItem){
+                p.useItem(p.selectedItem)
+            }
+        })
+        document.getElementById("view-item")?.addEventListener("mousedown", function(){
+            if(p.selectedItem){
+                showText(`${p.selectedItem.itemName}\n${p.selectedItem.description}`)
+            }
+        })
         while(backpack.firstChild){
             backpack.removeChild(backpack.firstChild)
         }
@@ -123,17 +136,36 @@ export class Player{
             itemImage.src = item.image
             itemImage.className = "item-img"
             newItem.className = `backpack-item ${item.itemID}`
+            itemImage.tabIndex = -1
             itemAmount.className = "item-amount noselect"
             newItem.appendChild(itemAmount)
             newItem.appendChild(itemImage)
-            itemImage.addEventListener("click", this.useItem.bind(this, item))
+            itemImage.addEventListener("click", function(){
+                itemImage.focus()
+            })
+            itemImage.addEventListener("focus", function(){
+                itemImage.src = item.cImage
+                p.selectedItem = item
+                commandBox.style.top = `${itemImage.getBoundingClientRect().top + window.scrollY}px`
+                commandBox.style.left = `${itemImage.getBoundingClientRect().right + window.scrollX}px`
+                commandBox.classList.remove("hidden")
+                
+            })
+            itemImage.addEventListener("blur", function(){
+                itemImage.src = item.image
+                commandBox.classList.add("hidden")
+                p.selectedItem = null
+            })
             itemImage.addEventListener("mouseover", function(){
-                itemImage.src = item.hImage
+                if(itemImage != document.activeElement){
+                    itemImage.src = item.hImage
+                }
             })
             itemImage.addEventListener("mouseout", function(){
-                itemImage.src = item.image
+                if(itemImage != document.activeElement){
+                    itemImage.src = item.image
+                }
             })
-
             backpack.appendChild(newItem)
         })
     }
@@ -162,7 +194,7 @@ export class Player{
                 break
             }
         }
-        else if(this.playerState == "battle"){
+        else if(this.playerState == "in-battle"){
             commandArea.appendChild(createElement(CommandAreas.battle))
         }
         else if(this.playerState == "crate"){
@@ -174,6 +206,7 @@ export class Player{
         this.position = [0,0]
         this.currentRoom = generate()
         this.dungeonLayer++
+        mazeLevelLabel.textContent = this.dungeonLayer
         drawMap(this.currentRoom, this)
         this.commandAreaUpdate()
     }
@@ -187,4 +220,20 @@ export class Player{
         this.commandAreaUpdate()
     }
     
+}
+
+class PlayerAttribute {
+    level = 1
+    strength = 10 //damage
+    vitality = 10 //stamina health
+    defense = 10 //defense
+    agility = 5//dodge
+    luck = 5 //lootRNG critical
+    knowledge = 5 //accurate
+    maxHealth = 100 + Math.round((this.vitality - 10) * 1.1)
+    MaxStamina = 50 + Math.round((this.vitality -  10) * 1.2)
+    MaxMp = 25 + Math.round((this.knowledge - 5) * 1.2)
+    health = this.maxHealth
+    stamina = this.MaxStamina
+    mp = this.MaxMp
 }

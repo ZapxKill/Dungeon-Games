@@ -3,6 +3,8 @@ import { Player } from "./playerController.js"
 import ItemTable from "../data/ItemTable.json" with {type: "json"}
 import { preloadRoomImages } from "./minimapDisplay.js";
 export let player = new Player(generate())
+const commandBox = document.getElementById("item-command-box")
+
 
 function preloadImage(url)
 {

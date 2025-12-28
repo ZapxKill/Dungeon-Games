@@ -19,6 +19,7 @@
 <body>
     <div id="ui-bar">
         <div id="ui-body">
+            <span id="maze-level">1</span>
             <canvas id="minimap" width="200" height="200"></canvas>
             <div id="stats">
                 <p class="stats-label noselect" id="health-label">Health</p>
@@ -29,6 +30,12 @@
                 <div class="stats-bar" id="mp"></div>
             </div>
             <div id="backpack"> 
+            </div>
+            <div class="hidden" id="item-command-box">
+                <ul class ="item-command-list">
+                    <li class="item-command" id="use-item">使用</li>
+                    <li class="item-command" id="view-item">檢視</li>
+                </ul>
             </div>
         </div>
     </div>

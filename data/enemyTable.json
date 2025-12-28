@@ -1,5 +1,34 @@
-{
-    "slime":{
-        
+[
+    {
+        "enemyID": "slime",
+        "enemyName": "史萊姆",
+        "description": "A weak and common monster.",
+        "image": "image/enemies/slime.png",
+        "attribute":{
+            "strength": 5,
+            "vitality": 8,
+            "defense": 3,
+            "agility": 2,
+            "luck": 1,
+            "knowledge": 1
+        },
+        "attributeLevelUp":{
+            "strength": 1,
+            "vitality": 2,
+            "defense": 1,
+            "agility": 1,
+            "luck": 0,
+            "knowledge": 0
+        },
+        "lootTable": [
+            {
+                "itemID": "heal_posion_s",
+                "dropRate": 0.5
+            },
+            {
+                "itemID": "stamina_posion_s",
+                "dropRate": 0.3
+            }
+        ]
     }
-}
+]

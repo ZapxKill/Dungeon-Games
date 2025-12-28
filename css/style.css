@@ -79,6 +79,18 @@ body{
     height: 100%;
     padding-left: 2%;
 }
+#maze-level{
+    position: absolute;
+    top : 10px;
+    left: 20px;
+    width: 40px;
+    height: 28px;
+    text-align: center;
+    color: white;
+    background-color: #202020;
+    font-size: 24px;
+    display: block;
+}
 #minimap{
     display: block;
     width: 100%;
@@ -201,6 +213,33 @@ body{
 #movement-right{
     grid-area: right;
 }
+
+
+#item-command-box{
+    position: absolute;
+    width: 75px;
+    height: auto;
+    background-color: #202020;
+    z-index: 10;
+
+}
+
+.item-command-list{
+    list-style: none;
+    padding: 4px;
+    margin: 0;
+}
+.item-command{
+    color: white;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.item-command:hover{
+    background-color: #404040;
+}
+
+
 
 .text{
     color: white;
