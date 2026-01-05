@@ -29,7 +29,13 @@ body{
 }
 
 
+#menu-btn {
+    display: none;
+}  
 
+.menu{
+    display: none;
+}
 .nav-bar{
     position: absolute;
     top: -50px;
@@ -40,9 +46,17 @@ body{
     transition: top 0.2s;
 }
 
+
+
 .nav-bar:hover{
     top: 0px;
 }
+
+.nav-bar:active{
+    top: 0px;
+}
+
+
 
 .nav-list{
     display: flex;
@@ -133,6 +147,7 @@ body{
     margin-bottom: 1em;
     flex: 1 1 auto;
     background-color: #404040;
+    align-content: start;
 }
 .backpack-item{
     position: relative;
@@ -239,6 +254,49 @@ body{
     background-color: #404040;
 }
 
+#battle-area{
+    
+
+    background-color: #202020;
+}
+
+.battle-description-box{
+    padding: 1%;
+}
+
+#battle-enemys{
+    padding: 1%;
+    display: flex;
+    flex-direction: row;
+}
+.enemy-box{
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid red;
+    padding: 1%;
+}
+
+.selectable-enemy-box{
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid red;
+    padding: 1%;
+    cursor: pointer;
+}
+.selectable-enemy-box:hover{
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #404040;
+    border: 2px solid orange;
+    padding: 1%;
+}
+
 
 
 .text{
@@ -249,4 +307,118 @@ body{
     display: none;
 }
 
+@media (max-width: 768px){
+    #menu-btn {
+        display: block;
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 5;
+        font-size: 24px;
+        color: white;
+        background-color: #404040;
+        padding: 5px 10px;
+        border: 2px solid gray;
+        cursor: pointer;
+    }
 
+    .menu{
+        display: flex;
+        flex-direction: column;
+        background-color: #404040;
+        width: 200px;
+        height: 100%;
+        justify-content: flex-start;
+        position: fixed;
+        z-index: 6;
+        top: 0px;
+        left: -200px;
+        transition: left 0.3s ease;
+        padding-top: 50px;
+    }
+    .menu .nav-list {
+        flex-direction: column;
+        padding: 0;
+        align-items: center;
+    }
+    .menu .nav-item {
+        margin: 20px 0;
+    }
+    #menu.show{
+        top: 0px;
+        left: 0px;
+        border-right: 3px solid gray;
+    }
+    .nav-bar{
+        display: none
+    }
+    #ui-bar{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 150px;
+        border-right: none;
+        border-bottom: 3px solid gray;
+    }
+    #ui-body{
+        flex-direction: row;
+        padding-left: 0;
+    }
+    #minimap{
+        width: auto;
+        height: 100%;
+        flex: 0 0 auto;
+    }
+    #stats{
+        width: 120px;
+        flex: 0 0 auto;
+        margin: 0 10px;
+        font-size: 0.8rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    #backpack{
+        margin: 5px 10% 5px 5px;
+        grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    }
+    #game-area{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 150px);
+        padding: 5% 5% 5% 5%;
+        top: 150px;
+    }
+}
+
+@media (max-width: 540px) {
+
+    .command-button{
+        width: 60px;
+    }
+    .movement-buttons{
+        width: auto;
+        gap: 0;
+    }
+    #backpack{
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        height: 150px;
+        z-index: 10;
+        background-color: #404040;
+        border-top: 3px solid gray;
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    }
+    #game-area{
+        bottom: 200px;
+        height: auto;
+    }
+    #stats{
+        width: auto;
+    }
+}

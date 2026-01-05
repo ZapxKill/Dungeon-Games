@@ -1,3 +1,5 @@
+import EnemyTable from "../data/EnemyTable.json" with {type: "json"}
+import ItemTable from "../data/ItemTable.json" with {type: "json"}
 export let TargetRoomAmount = 20
 export let rooms = []
 export let seen = new Set()
@@ -6,24 +8,41 @@ export class Room {
     connects = [null,null,null,null]
     position = [0,0]
     playerSeen = false
-    roomContent = "empty-room" //0: empty, 1: enemy, 2: loot 3: exit
+    isExit = false
+    roomContent = "empty-room"
+    roomEnemys = []
+    roomLoots = []
     constructor(connectedDirection, connectedRoom){
         if(connectedDirection == null || connectedRoom == null){
             seen.add(`${this.position[0]},${this.position[1]}`)
             this.playerSeen = true
-            this.roomContent = "empty-room"
             roomAmount += 1
             return
         }
         let roomContentChance = Math.random()
-        if(roomContentChance < 0.6){
-            this.roomContent = "empty-room"
-        }
-        else if(roomContentChance < 0.8){
+        if(roomContentChance < 0.2){
             this.roomContent = "enemy-room"
+            for(let i=0;i<Math.ceil(Math.random()*2);i++){
+                this.roomEnemys.push(EnemyTable[Math.floor(Math.random() * EnemyTable.length)])
+            }
+        }
+        else if(roomContentChance < 0.4){
+            this.roomContent = "crate-room"
+            for(let i=0;i<Math.ceil(Math.random()*3);i++){
+                this.roomLoots.push(ItemTable[Math.floor(Math.random() * ItemTable.length)])
+            }
+        }
+        else if(roomContentChance < 0.5){
+            this.roomContent = "enemy-room"
+            for(let i=0;i<Math.ceil(Math.random()*3);i++){
+                this.roomLoots.push(ItemTable[Math.floor(Math.random() * ItemTable.length)])
+            }
+            for(let i=0;i<Math.ceil(Math.random()*2);i++){
+                this.roomEnemys.push(EnemyTable[Math.floor(Math.random() * EnemyTable.length)])
+            }
         }
         else{
-            this.roomContent = "crate-room"
+            this.roomContent = "empty-room"
         }
         switch(connectedDirection){
             case 0:
@@ -125,6 +144,7 @@ export function generate(){
     while(tmp == 0){
         tmp = Math.floor(Math.random() * rooms.length)
     }
+    rooms[tmp].isExit = true
     rooms[tmp].roomContent = "exit-room"
     return root
 }

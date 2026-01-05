@@ -4,14 +4,17 @@ import { showRoomText, showRandomText, showText } from "./StoryTextController.js
 import { createElement } from "./UIController.js"
 import { CommandAreas } from "./CommandAreas.js"
 import TextTable from "../data/TextTable.json" with {type: "json"}
+import EnemyTable from "../data/EnemyTable.json" with {type: "json"}
 import { generate } from "./mapGenerator.js"
+import { BattleArea, startBattle } from "./battleController.js"
+import { player } from "./gameController.js"
 const HealthBar = document.getElementById("health")
 const StaminaBar = document.getElementById("stamina")
 const MpBar = document.getElementById("mp")
 const HealthLabel = document.getElementById("health-label")
 const StaminaLabel = document.getElementById("stamina-label")
 const MpLabel = document.getElementById("mp-label")
-const commandArea = document.getElementById("game-area")
+const gameArea = document.getElementById("game-area")
 const mazeLevelLabel = document.getElementById("maze-level")
 
 
@@ -27,6 +30,9 @@ export class Player{
         this.position[1] = room.position[1]
         this.currentRoom = room
         showRandomText(TextTable["new-game"])
+        ItemTable.forEach(item => {
+            this.getItem(JSON.parse(JSON.stringify(item)))
+        })
         drawMap(this.currentRoom, this)
         this.commandAreaUpdate()
         this.playerStatsUpdate()
@@ -35,11 +41,11 @@ export class Player{
         if(this.attribute.health > this.attribute.maxHealth){
             this.attribute.health = this.attribute.maxHealth
         }  
-        if(this.attribute.stamina > this.attribute.MaxStamina){
-            this.attribute.stamina = this.attribute.MaxStamina
+        if(this.attribute.stamina > this.attribute.maxStamina){
+            this.attribute.stamina = this.attribute.maxStamina
         }
-        if(this.attribute.mp  > this.attribute.MaxMp){
-            this.attribute.mp = this.attribute.MaxMp
+        if(this.attribute.mp  > this.attribute.maxMp){
+            this.attribute.mp = this.attribute.maxMp
         }
     }
     moveRoom(direction){
@@ -65,18 +71,20 @@ export class Player{
     playerStatsUpdate(){
         this.statsOverflowCheck()
         HealthBar.style.width = `${this.attribute.health/this.attribute.maxHealth*100}%`
-        StaminaBar.style.width = `${this.attribute.stamina/this.attribute.MaxStamina*100}%`
-        MpBar.style.width = `${this.attribute.mp/this.attribute.MaxMp*100}%`
+        StaminaBar.style.width = `${this.attribute.stamina/this.attribute.maxStamina*100}%`
+        MpBar.style.width = `${this.attribute.mp/this.attribute.maxMp*100}%`
         HealthLabel.textContent = `Health: ${this.attribute.health}/${this.attribute.maxHealth}`
-        StaminaLabel.textContent = `Stamina: ${this.attribute.stamina}/${this.attribute.MaxStamina}`
-        MpLabel.textContent = `MP: ${this.attribute.mp}/${this.attribute.MaxMp}`
+        StaminaLabel.textContent = `Stamina: ${this.attribute.stamina}/${this.attribute.maxStamina}`
+        MpLabel.textContent = `MP: ${this.attribute.mp}/${this.attribute.maxMp}`
 
     }
     takeRest(){
         this.attribute.stamina += 5
         let roomContentChance = Math.random()
         if(roomContentChance < 0.4){
-            this.currentRoom.roomContent = "enemy-room"
+            for(let i=0;i<Math.ceil(Math.random()*2);i++){
+                this.currentRoom.roomEnemys.push(EnemyTable[Math.floor(Math.random() * EnemyTable.length)])
+            }
             showRandomText(TextTable["rest-encounter-enemy"])
             this.commandAreaUpdate()
         }
@@ -170,37 +178,33 @@ export class Player{
         })
     }
     commandAreaUpdate(){
-        while(commandArea.lastChild.id != "description-box"){
-            commandArea.removeChild(commandArea.lastChild)
+        while(gameArea.lastChild.id != "description-box"){
+            gameArea.removeChild(gameArea.lastChild)
         }
         if(this.playerState == "searching"){
-            switch(this.currentRoom.roomContent){
-            case "empty-room":
-                commandArea.appendChild(createElement(CommandAreas.movement))
-                break
-            case "enemy-room":
-                commandArea.appendChild(createElement(CommandAreas.encounterEnemy))
-                break
-            case "crate-room":
-                commandArea.appendChild(createElement(CommandAreas.movement))
-                commandArea.appendChild(createElement(CommandAreas.findCrate))
-                break
-            case "exit-room":
-                commandArea.appendChild(createElement(CommandAreas.movement))
-                commandArea.appendChild(createElement(CommandAreas.findExit))
-                break
-            default:
-                commandArea.appendChild(createElement(CommandAreas.movement))
-                break
+            if(this.currentRoom.roomEnemys.length > 0){
+                gameArea.appendChild(createElement(CommandAreas.encounterEnemy))
+            }
+            else if(this.currentRoom.roomLoots.length > 0){
+                gameArea.appendChild(createElement(CommandAreas.movement))
+                gameArea.appendChild(createElement(CommandAreas.findCrate))
+            }
+            else{
+                gameArea.appendChild(createElement(CommandAreas.movement))
             }
         }
-        else if(this.playerState == "in-battle"){
-            commandArea.appendChild(createElement(CommandAreas.battle))
-        }
         else if(this.playerState == "crate"){
-            commandArea.appendChild(createElement(CommandAreas.crate))
+            gameArea.appendChild(createElement(CommandAreas.crate))
         }
-        
+        else if(this.playerState == "fleeing"){
+            gameArea.appendChild(createElement(CommandAreas.fleeing))
+        }
+        else if(this.playerState == "end-battle"){
+            gameArea.appendChild(createElement(CommandAreas.endBattle))
+        }
+        else if(this.playerState == "defeated"){
+            gameArea.appendChild(createElement(CommandAreas.defeated))
+        }
     }
     enterNewLevel(){
         this.position = [0,0]
@@ -212,11 +216,17 @@ export class Player{
     }
 
     openCreate(){
-        let item = ItemTable[Math.floor(Math.random() * ItemTable.length)]
-        showText(`你打開箱子獲得了 ${item.itemName}`)
-        this.getItem(item)
+        let itemList = this.currentRoom.roomLoots
+        let itemString = ""
+        for(let i=0;i< itemList.length;i++){
+            let item = itemList[i]
+            itemString += `${item.itemName} `
+            this.getItem(item)
+        }
+        showText(`你打開箱子獲得了 ${itemString}`)
         this.playerState = "searching"
         this.currentRoom.roomContent = "empty-room"
+        this.currentRoom.roomLoots = []
         this.commandAreaUpdate()
     }
     
@@ -230,10 +240,10 @@ class PlayerAttribute {
     agility = 5//dodge
     luck = 5 //lootRNG critical
     knowledge = 5 //accurate
-    maxHealth = 100 + Math.round((this.vitality - 10) * 1.1)
-    MaxStamina = 50 + Math.round((this.vitality -  10) * 1.2)
-    MaxMp = 25 + Math.round((this.knowledge - 5) * 1.2)
+    maxHealth = 50 + Math.round((this.vitality - 10) * 1.1)
+    maxStamina = 25 + Math.round((this.vitality -  10) * 1.2)
+    maxMp = 10 + Math.round((this.knowledge - 5) * 1.2)
     health = this.maxHealth
-    stamina = this.MaxStamina
-    mp = this.MaxMp
+    stamina = this.maxStamina
+    mp = this.maxMp
 }

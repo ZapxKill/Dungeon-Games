@@ -2,10 +2,11 @@
 <html lang="zh-Hant-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="css/style.css" rel="stylesheet">
     <title>Dungeon Game</title>
     <script type="module" src="script/gameController.js"></script>
+    <script type="module" src="script/menuController.js"></script>
 </head>
 <nav>
     <div class="nav-bar">
@@ -17,6 +18,14 @@
     </div>
 </nav>
 <body>
+    <div id="menu-btn" class="noselect">☰</div>
+    <div id="menu" class="menu">
+        <ul class="nav-list">
+            <li class="nav-item"><a class="nav-text" href="">首頁</a></li>
+            <li class="nav-item"><a class="nav-text" href="">遊戲</a></li>
+            <li class="nav-item"><a class="nav-text" href="">統計</a></li>
+        </ul>
+    </div>
     <div id="ui-bar">
         <div id="ui-body">
             <span id="maze-level">1</span>

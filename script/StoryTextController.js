@@ -1,6 +1,6 @@
 import TextTable from "../data/TextTable.json" with {type: "json"}
 
-const description = document.getElementById("description")
+let description = document.getElementById("description")
 let textRunning
 export function showRoomText(room){
     addCharInText("", TextTable[room.roomContent][Math.floor(Math.random() * TextTable[room.roomContent].length)])
@@ -26,3 +26,10 @@ function addCharInText(currentText, text){
         addCharInText(currentText, text)
     }, 50);
 }   
+
+export function enterBattleUI(){
+    description = document.getElementById("battle-description")
+}
+export function leaveBattleUI(){
+    description = document.getElementById("description")
+}

@@ -1,21 +1,28 @@
 import { player } from "./gameController.js";
-import { showRandomText, showText } from "./StoryTextController.js";
+import { showRandomText, showText, showRoomText } from "./StoryTextController.js";
 import TextTable from "../data/TextTable.json" with {type: "json"}
+import { enemyList, fleeBattle, startBattle } from "./battleController.js";
+import { createElement } from "./UIController.js";
+import { playerAttack, playerDefend } from "./battleController.js";
+import { generate } from "./mapGenerator.js";
+import { drawMap } from "./minimapDisplay.js";
+
+const gameArea = document.getElementById("game-area");
 export const CommandAreas = {
     movement: {
         elementType: "div",
         className: "command-area",
-        id: "",
-        text: "",
-        onClickFunction: null,
+        id: undefined,
+        text: undefined,
+        onClickFunction: undefined,
         children: 
         [
             {
                 elementType: "div",
                 className: "movement-buttons",
-                id: "",
-                text: "",
-                onClickFunction: null,
+                id: undefined,
+                text: undefined,
+                onClickFunction: undefined,
                 children: [
                     {
                         elementType: "button",
@@ -62,7 +69,7 @@ export const CommandAreas = {
             {
                 elementType: "button",
                 className: "command-button",
-                id: "movement-rest",
+                id: undefined,
                 text: "休息",
                 onClickFunction: function(){
                     player.takeRest()
@@ -74,14 +81,14 @@ export const CommandAreas = {
     crate: {
         elementType: "div",
         className: "command-area",
-        id: "",
-        text: "",
-        onClickFunction: null,
+        id: undefined,
+        text: undefined,
+        onClickFunction: undefined,
         children: [
             {
                 elementType: "button",
                 className: "command-button",
-                id: "crate-open",
+                id: undefined,
                 text: "打開箱子",
                 onClickFunction: function(){
                     player.openCreate()
@@ -91,7 +98,7 @@ export const CommandAreas = {
             {
                 elementType: "button",
                 className: "command-button",
-                id: "crate-leave",
+                id: undefined,
                 text: "離開",
                 onClickFunction: function(){
                     showText("你離開了箱子")
@@ -105,30 +112,42 @@ export const CommandAreas = {
     battle: {
         elementType: "div",
         className: "command-area",
-        id: "",
-        text: "",
-        onClickFunction: null,
+        id: "battle-command",
+        text: undefined,
+        onClickFunction: undefined,
         children: [
             {
                 elementType: "button",
                 className: "command-button",
-                id: "battle-attack",
+                id: undefined,
                 text: "攻擊",
-                onClickFunction: function(){},
+                onClickFunction: function(){
+                    document.getElementById("battle-command").classList.remove("hidden")
+                    const battleEnemys = document.getElementById("battle-enemys")
+                    gameArea.removeChild(document.getElementById("battle-command"))
+                    gameArea.appendChild(createElement(CommandAreas.attackingEnemy))
+                    for(let i=0;i<enemyList.length;i++){
+                        battleEnemys.children[i].addEventListener("click", attackEnemy)
+                        battleEnemys.children[i].enemyIndex = i
+                        battleEnemys.children[i].className = "selectable-enemy-box"  
+                    }
+                },
                 children: []
             },
             {
                 elementType: "button",
                 className: "command-button",
-                id: "battle-defend",
+                id: undefined,
                 text: "防禦",
-                onClickFunction: function(){},
+                onClickFunction: function(){
+                    playerDefend()
+                },
                 children: []
             },
             {
                 elementType: "button",
-                className: "command-button",
-                id: "battle-skill",
+                className: "command-button hidden",
+                id: undefined,
                 text: "技能",
                 onClickFunction: function(){},
                 children: []
@@ -136,9 +155,11 @@ export const CommandAreas = {
             {
                 elementType: "button",
                 className: "command-button",
-                id: "battle-flee",
+                id: undefined,
                 text: "逃跑",
-                onClickFunction: function(){},
+                onClickFunction: function(){
+                    fleeBattle()
+                },
                 children: []
             }
         ]
@@ -146,19 +167,17 @@ export const CommandAreas = {
     encounterEnemy: {
         elementType: "div",
         className: "command-area",
-        id: "",
-        text: "",
-        onClickFunction: null,
+        id: undefined,
+        text: undefined,
+        onClickFunction: undefined,
         children: [
             {
                 elementType: "button",
                 className: "command-button",
-                id: "event-battle-entry",
+                id: undefined,
                 text: "戰鬥",
                 onClickFunction: function(){
-                    showText("你消滅了敵人")
-                    player.currentRoom.roomContent = "empty-room"
-                    player.commandAreaUpdate()
+                    startBattle(player.currentRoom.roomEnemys)
                 },
                 children: []
             }
@@ -167,14 +186,14 @@ export const CommandAreas = {
     findCrate: {
         elementType: "div",
         className: "command-area",
-        id: "",
-        text: "",
-        onClickFunction: null,
+        id: undefined,
+        text: undefined,
+        onClickFunction: undefined,
         children: [
             {
                 elementType: "button",
                 className: "command-button",
-                id: "event-crate-observe",
+                id: undefined,
                 text: "靠近箱子",
                 onClickFunction: function(){
                     player.playerState = "crate"
@@ -188,14 +207,14 @@ export const CommandAreas = {
     findExit: {
         elementType: "div",
         className: "command-area",
-        id: "",
-        text: "",
-        onClickFunction: null,
+        id: undefined,
+        text: undefined,
+        onClickFunction: undefined,
         children: [
             {
                 elementType: "button",
                 className: "command-button",
-                id: "event-exit-entry",
+                id: undefined,
                 text: "走進大門",
                 onClickFunction: function(){
                     player.enterNewLevel()
@@ -204,8 +223,126 @@ export const CommandAreas = {
                 children: []
             }
         ]
-    }
+    },
+    fleeing: {
+        elementType: "div",
+        className: "command-area",
+        id: undefined,
+        text: undefined,
+        onClickFunction: undefined,
+        children: [
+            {
+                elementType: "button",
+                className: "command-button",
+                id: undefined,
+                text: "繼續",
+                onClickFunction: function(){
+                    player.playerState = "searching"
+                    let direction = 0
+                    do{
+                        direction = Math.floor(Math.random() * 4)
+
+                    }
+                    while(!player.moveRoom(direction))
+                },
+                children: []
+            }
+        ]
+    },
+    endBattle:{
+        elementType: "div",
+        className: "command-area",
+        id: undefined,
+        text: undefined,
+        onClickFunction: undefined,
+        children: [
+            {
+                elementType: "button",
+                className: "command-button",
+                id: undefined,
+                text: "繼續",
+                onClickFunction: function(){
+                    player.playerState = "searching"
+                    showRoomText(player.currentRoom)
+                    player.commandAreaUpdate()
+                },
+                children: []
+            }
+        ]
+    },
+    attackingEnemy:{
+        elementType: "div",
+        className: "command-area",
+        id: "attacking-enemy-command",
+        text: undefined,
+        onClickFunction: undefined,
+        children: [
+            {
+                elementType: "button",
+                className: "command-button",
+                id: undefined,
+                text: "取消",
+                onClickFunction: function(){
+                    const battleEnemys = document.getElementById("battle-enemys")
+                    for(let i=0;i<enemyList.length;i++){
+                        battleEnemys.children[i].removeEventListener("click", attackEnemy)
+                        battleEnemys.children[i].className = "enemy-box"
+                    }
+                    gameArea.removeChild(document.getElementById("attacking-enemy-command"))
+                    gameArea.appendChild(createElement(CommandAreas.battle))
+                    
+                },
+                children: []
+            }
+        ]
+    },
+    defeated: {
+        elementType: "div",
+        className: "command-area",
+        id: undefined,
+        text: undefined,
+        onClickFunction: undefined,
+        children: [
+            {
+                elementType: "button",
+                className: "command-button",
+                id: undefined,
+                text: "繼續",
+                onClickFunction: function(){
+                    player.playerState = "searching"
+                    player.position = [0,0]
+                    player.currentRoom = generate()
+                    player.dungeonLayer = 1
+                    player.inventory = []
+                    player.inventoryUpdate(player)
+                    const mazeLevelLabel = document.getElementById("maze-level")
+                    mazeLevelLabel.textContent = player.dungeonLayer
+                    drawMap(player.currentRoom, player)
+                    player.commandAreaUpdate()
+                    player.attribute.health = player.attribute.maxHealth
+                    player.attribute.stamina = player.attribute.maxStamina
+                    player.attribute.mp = player.attribute.maxMp
+                    player.playerStatsUpdate()
+                    showRandomText(TextTable["new-game"])
+                },
+                children: []
+            }
+        ]
+    },
 }
 
-
+function attackEnemy(event){
+    const battleEnemys = document.getElementById("battle-enemys")
+    if(playerAttack(event.currentTarget.enemyIndex)){
+        gameArea.removeChild(document.getElementById("attacking-enemy-command"))
+        gameArea.appendChild(createElement(CommandAreas.battle))
+        for(let j=0;j<enemyList.length;j++){
+            battleEnemys.children[j].removeEventListener("click", attackEnemy)
+            battleEnemys.children[j].className = "enemy-box"
+        }
+        return
+    }
+    return
+    
+}
 
