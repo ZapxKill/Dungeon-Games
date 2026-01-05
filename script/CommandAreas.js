@@ -194,7 +194,7 @@ export const CommandAreas = {
                 elementType: "button",
                 className: "command-button",
                 id: undefined,
-                text: "靠近箱子",
+                text: "靠近",
                 onClickFunction: function(){
                     player.playerState = "crate"
                     showRandomText(TextTable["crate-observe"])
