@@ -1,5 +1,4 @@
 import { player } from "./gameController.js";
-import EnemyTable from "../data/EnemyTable.json" with {type: "json"}
 import { createElement } from "./UIController.js";
 import { CommandAreas } from "./CommandAreas.js";
 import { enterBattleUI, leaveBattleUI, showText} from "./StoryTextController.js";

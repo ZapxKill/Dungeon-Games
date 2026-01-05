@@ -1,4 +1,3 @@
-import ItemTable from "../data/ItemTable.json" with {type: "json"}
 import { drawMap } from "./minimapDisplay.js"
 import { showRoomText, showRandomText, showText } from "./StoryTextController.js"
 import { createElement } from "./UIController.js"
@@ -6,8 +5,7 @@ import { CommandAreas } from "./CommandAreas.js"
 import TextTable from "../data/TextTable.json" with {type: "json"}
 import EnemyTable from "../data/EnemyTable.json" with {type: "json"}
 import { generate } from "./mapGenerator.js"
-import { BattleArea, startBattle } from "./battleController.js"
-import { player } from "./gameController.js"
+
 const HealthBar = document.getElementById("health")
 const StaminaBar = document.getElementById("stamina")
 const MpBar = document.getElementById("mp")
