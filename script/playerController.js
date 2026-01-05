@@ -30,9 +30,6 @@ export class Player{
         this.position[1] = room.position[1]
         this.currentRoom = room
         showRandomText(TextTable["new-game"])
-        ItemTable.forEach(item => {
-            this.getItem(JSON.parse(JSON.stringify(item)))
-        })
         drawMap(this.currentRoom, this)
         this.commandAreaUpdate()
         this.playerStatsUpdate()
