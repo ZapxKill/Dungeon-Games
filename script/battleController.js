@@ -145,6 +145,7 @@ function enemyAttack(enemyIndex){
 }
 
 export function playerDefend(){
+    battleDescriptionString = ""
     battleDescriptionString = "你採取了防禦姿態，減少了下一次受到的傷害！\n"
     player.attribute.defense *= 1.5
     enemyAttack(nextAttackEnemyIndex)
@@ -212,7 +213,8 @@ export function fleeBattle(){
         showText("你成功逃離了戰鬥")
         return
     }
-    showText("逃跑失敗！")
+    battleDescriptionString = ""
+    battleDescriptionString += "逃跑失敗！"
     enemyAttack(nextAttackEnemyIndex)
 }
 

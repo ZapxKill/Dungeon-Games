@@ -89,7 +89,7 @@ export const CommandAreas = {
                 elementType: "button",
                 className: "command-button",
                 id: undefined,
-                text: "打開箱子",
+                text: "打開",
                 onClickFunction: function(){
                     player.openCreate()
                 },
