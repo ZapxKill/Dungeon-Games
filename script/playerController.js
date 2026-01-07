@@ -44,11 +44,12 @@ export class Player{
         }
     }
     moveRoom(direction){
-        if(this.attribute.stamina >= 5 && this.currentRoom.connects[direction] != null){
+        console.log(direction)
+        if(this.attribute.stamina >= 2.5 && this.currentRoom.connects[direction] != null){
             this.currentRoom = this.currentRoom.connects[direction]
             this.currentRoom.playerSeen = true
             this.position = this.currentRoom.position
-            this.attribute.stamina-=5
+            this.attribute.stamina-=2.5
             drawMap(this.currentRoom, this)
             showRoomText(this.currentRoom)
             this.playerStatsUpdate()
@@ -183,6 +184,10 @@ export class Player{
             else if(this.currentRoom.roomLoots.length > 0){
                 gameArea.appendChild(createElement(CommandAreas.movement))
                 gameArea.appendChild(createElement(CommandAreas.findCrate))
+            }
+            else if(this.currentRoom.isExit){
+                gameArea.appendChild(createElement(CommandAreas.movement))
+                gameArea.appendChild(createElement(CommandAreas.findExit))
             }
             else{
                 gameArea.appendChild(createElement(CommandAreas.movement))

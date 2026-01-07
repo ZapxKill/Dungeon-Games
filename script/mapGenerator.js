@@ -144,6 +144,8 @@ export function generate(){
     while(tmp == 0){
         tmp = Math.floor(Math.random() * rooms.length)
     }
+    rooms[tmp].roomLoots = []
+    rooms[tmp].roomEnemys = [] 
     rooms[tmp].isExit = true
     rooms[tmp].roomContent = "exit-room"
     return root

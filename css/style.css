@@ -37,6 +37,8 @@ body{
     display: none;
 }
 .nav-bar{
+    background-image: url("/image/UI/Banner_Slots.png");
+    background-size: contain;
     position: absolute;
     top: -50px;
     left: 300px;
@@ -63,11 +65,12 @@ body{
     flex-direction: row;
     justify-content: left;
     align-content: center;
+    margin-left: 30px;
 }
 
 .nav-item{
     list-style: none;
-    margin-right: 5%;
+    margin-right: 150px;
 }
 
 .nav-text{
@@ -77,10 +80,12 @@ body{
 }
 
 #ui-bar{
-    position: absolute;
+    background-image: url('/image/UI/UIbg.png');
+    background-position: -50px -75px;
+    background-size:  200% 125%;
+    background-repeat: no-repeat;
     top: 0;
     left: 0;
-    margin: 0;
     width: 250px;
     height: 100%;
     padding-right: 1%;
@@ -95,8 +100,8 @@ body{
 }
 #maze-level{
     position: absolute;
-    top : 10px;
-    left: 20px;
+    top : 20px;
+    left: 40px;
     width: 40px;
     height: 28px;
     text-align: center;
@@ -112,8 +117,15 @@ body{
     height: auto;
     flex: 0 0 auto;
     background-color: gray;
+    background-image: url(/image/UI/mapBg.png);
+    background-size: 100% 100%;
 }
 #stats{
+    background-color: #404040;
+    margin-top: 1em;
+    border: 3px solid gray;
+    border-radius: 10px;
+    padding: 3%;
     flex: 0 0 auto;
     width: 100%;
 }
@@ -147,6 +159,8 @@ body{
     margin-bottom: 1em;
     flex: 1 1 auto;
     background-color: #404040;
+    border: 3px solid gray;
+    border-radius: 10px;
     align-content: start;
 }
 .backpack-item{
@@ -170,6 +184,10 @@ body{
     text-shadow: 1px 1px 2px black;
 }
 #game-area{
+    background-image: url("/image/UI/gameAreaBg.png");
+    background-position: -50px 0px;
+    background-size: cover;
+    background-repeat: no-repeat;
     position: absolute;
     top: 10%;
     left: 300px;
@@ -177,11 +195,12 @@ body{
     height: 80%;
     display: flex;
     flex-direction: column;
-    background-color: #404040;
     padding: 5% 5% 5% 5%;
 }
 #description-box{
-    background-color: #202020;
+    background-color: #d8d8d8;
+    border: #202020 3px solid;
+    border-radius: 10px;
     height: 30%;
     margin-bottom: 1.5em;
     padding: 1%;
@@ -192,16 +211,22 @@ body{
 .command-area{
     flex: 0 1 auto;
     padding: 1% 0 0 0;
-    background-color: #202020;
 }
 
 .command-button{
-    background-color: #404040;
+    background-image: url("/image/UI/button.png");
+    background-size: 100% 100%;
+    border: none;
+    border-radius: 10px;
     color: white;
     width: 100px;
-    height: 50px;
+    height: 75px;
     margin: 1em;
     cursor: pointer;
+}
+
+.command-button:hover{
+    background-image: url("/image/UI/button-hover.png");
 }
 
 .movement-buttons{
@@ -255,9 +280,9 @@ body{
 }
 
 #battle-area{
-    
-
-    background-color: #202020;
+    background-color: #d8d8d8;
+    border: #202020 3px solid;
+    border-radius: 10px;
 }
 
 .battle-description-box{
@@ -300,7 +325,7 @@ body{
 
 
 .text{
-    color: white;
+    color: black;
 }
 
 .hidden{
@@ -308,6 +333,17 @@ body{
 }
 
 @media (max-width: 768px){
+
+    #maze-level{
+        top : 20px;
+        left: 20px;
+        width: 30px;
+        height: 20px;
+        font-size: 16px;
+    }
+    #ui-bar{
+        background-position: -100px 0;
+    }
     #menu-btn {
         display: block;
         position: fixed;
@@ -323,6 +359,8 @@ body{
     }
 
     .menu{
+        background-image: url("/image/UI/Banner_Slots.png");
+        background-size: contain;
         display: flex;
         flex-direction: column;
         background-color: #404040;
@@ -337,12 +375,13 @@ body{
         padding-top: 50px;
     }
     .menu .nav-list {
+        margin: 10px 0 0 0;
         flex-direction: column;
         padding: 0;
         align-items: center;
     }
     .menu .nav-item {
-        margin: 20px 0;
+        margin: 16px 0;
     }
     #menu.show{
         top: 0px;
@@ -373,14 +412,14 @@ body{
     #stats{
         width: 120px;
         flex: 0 0 auto;
-        margin: 0 10px;
+        margin: 10px 0px 5px 10px;
         font-size: 0.8rem;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
     }
     #backpack{
-        margin: 5px 10% 5px 5px;
+        margin: 10px 10% 5px 5px;
         grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
     }
     #game-area{
@@ -396,6 +435,7 @@ body{
 
 @media (max-width: 540px) {
 
+   
     .command-button{
         width: 60px;
     }

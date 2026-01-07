@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="css/style.css" rel="stylesheet">
+    <title>Dungeon</title>
+    <script type="module" src="script/gameController.js"></script>
+    <script type="module" src="script/menuController.js"></script>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<nav>
+    <div class="nav-bar">
+        <ul class="nav-list">
+            <li class="nav-item"><a class="nav-text" href="/index.html">首頁</a></li>
+            <li class="nav-item"><a class="nav-text" href="">統計</a></li>
+        </ul>
+    </div>
+</nav>
+<body>
+    <div id="menu-btn" class="noselect">☰</div>
+    <div id="menu" class="menu">
+        <ul class="nav-list">
+            <li class="nav-item"><a class="nav-text" href="/index.html">首頁</a></li>
+            <li class="nav-item"><a class="nav-text" href="">統計</a></li>
+        </ul>
+    </div>
+    <div id="ui-bar">
+        <div id="ui-body">
+            <span id="maze-level">1</span>
+            <canvas id="minimap" width="200" height="200"></canvas>
+            <div id="stats">
+                <p class="stats-label noselect" id="health-label">Health</p>
+                <div class="stats-bar" id="health"></div>
+                <p class="stats-label noselect" id="stamina-label">Stamina</p>
+                <div class="stats-bar" id="stamina"></div>
+                <p class="stats-label noselect" id="mp-label">MP</p>
+                <div class="stats-bar" id="mp"></div>
+            </div>
+            <div id="backpack"> 
+            </div>
+            <div class="hidden" id="item-command-box">
+                <ul class ="item-command-list">
+                    <li class="item-command" id="use-item">使用</li>
+                    <li class="item-command" id="view-item">檢視</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="game-area">
+        <div id="description-box">
+            <p class="text" id="description">Loading...</p>
+        </div>
+    </div>
+</body>
+</html>

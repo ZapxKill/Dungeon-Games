@@ -183,6 +183,9 @@ function endBattle(){
     if(player.currentRoom.roomLoots.length > 0){
         player.currentRoom.roomContent = "crate-room"
     }
+    else{
+        player.currentRoom.roomContent = "empty-room"
+    }
     player.currentRoom.roomEnemys = []
     if(lootItems.length > 0){
         battleResultText += "\n你獲得了以下物品：\n"

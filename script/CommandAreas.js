@@ -215,7 +215,7 @@ export const CommandAreas = {
                 elementType: "button",
                 className: "command-button",
                 id: undefined,
-                text: "走進大門",
+                text: "進入",
                 onClickFunction: function(){
                     player.enterNewLevel()
                     showText("你來到了下一層")
@@ -241,7 +241,6 @@ export const CommandAreas = {
                     let direction = 0
                     do{
                         direction = Math.floor(Math.random() * 4)
-
                     }
                     while(!player.moveRoom(direction))
                 },

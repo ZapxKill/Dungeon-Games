@@ -1,57 +1,36 @@
 <!DOCTYPE html>
-<html lang="zh-Hant-TW">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link href="css/style.css" rel="stylesheet">
-    <title>Dungeon Game</title>
-    <script type="module" src="script/gameController.js"></script>
-    <script type="module" src="script/menuController.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dungeon</title>
+    <link rel="stylesheet" href="css/homeStyles.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
-<nav>
-    <div class="nav-bar">
-        <ul class="nav-list">
-            <li class="nav-item"><a class="nav-text" href="">首頁</a></li>
-            <li class="nav-item"><a class="nav-text" href="">遊戲</a></li>
-            <li class="nav-item"><a class="nav-text" href="">統計</a></li>
-        </ul>
-    </div>
-</nav>
 <body>
-    <div id="menu-btn" class="noselect">☰</div>
-    <div id="menu" class="menu">
-        <ul class="nav-list">
-            <li class="nav-item"><a class="nav-text" href="">首頁</a></li>
-            <li class="nav-item"><a class="nav-text" href="">遊戲</a></li>
-            <li class="nav-item"><a class="nav-text" href="">統計</a></li>
-        </ul>
-    </div>
-    <div id="ui-bar">
-        <div id="ui-body">
-            <span id="maze-level">1</span>
-            <canvas id="minimap" width="200" height="200"></canvas>
-            <div id="stats">
-                <p class="stats-label noselect" id="health-label">Health</p>
-                <div class="stats-bar" id="health"></div>
-                <p class="stats-label noselect" id="stamina-label">Stamina</p>
-                <div class="stats-bar" id="stamina"></div>
-                <p class="stats-label noselect" id="mp-label">MP</p>
-                <div class="stats-bar" id="mp"></div>
+    <section id="slide1" class="slide">
+        <div class="slide-content">
+            <div class="logo-container">
+                <img src="image/homePage/logo.png" alt="Logo" class="logo">
             </div>
-            <div id="backpack"> 
-            </div>
-            <div class="hidden" id="item-command-box">
-                <ul class ="item-command-list">
-                    <li class="item-command" id="use-item">使用</li>
-                    <li class="item-command" id="view-item">檢視</li>
-                </ul>
+            <button class="game-start-btn" onclick="scrollToSlide2()">
+                <img src="image/homePage/game_start_btn.png" alt="GameStart" class="btn-image">
+                <span class="btn-text">介紹</span>
+            </button>
+        </div>
+    </section>
+    <section id="slide2" class="slide">
+        <div class="slide-content">
+            <div class="game-description">
+                <h1>你一覺醒來，發現自己身處在一個地牢當中，雖然這是你第一次出現在此，但你對這個地方有著莫名的熟悉感。你必須探索這個地牢，解開謎團，找到逃脫的路徑。在探索著過程中，你發現這裡是個迷宮，你已經爬了一層又一層了，似乎還沒有要到頭的樣子，路上遭遇的戰鬥，使你疲倦不堪，開始迷失在這座地牢中。</h1>
             </div>
         </div>
-    </div>
-    <div id="game-area">
-        <div id="description-box">
-            <p class="text" id="description">Loading...</p>
-        </div>
-    </div>
+        <button class="game-start-btn" onclick="startGame()">
+            <img src="image/homePage/game_start_btn.png" alt="GameStart" class="btn-image">
+            <span class="btn-text">開始</span>
+        </button>
+    </section>
+    <script src="script/homePageScript.js"></script>
 </body>
 </html>
+
