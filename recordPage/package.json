@@ -1,6 +1,6 @@
 {
   "name": "Dungeon-Games Record Page",
-  "homepage": "https://https://zapxkill.github.io/Dungeon-Games/Record",
+  "homepage": "https://zapxkill.github.io/Dungeon-Games/Record",
   "private": true,
   "version": "0.0.1",
   "type": "module",
@@ -9,7 +9,7 @@
     "dev": "vite",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages --dist dist --dest Record --add"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",

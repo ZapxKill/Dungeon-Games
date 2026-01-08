@@ -16,5 +16,5 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  base: "./Dungeon-Games/Record/",
+  base: "/Dungeon-Games/Record",
 })
