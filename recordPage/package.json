@@ -1,11 +1,15 @@
 {
-  "name": "@figma/my-make-file",
+  "name": "Dungeon-Games Record Page",
+  "homepage": "https://https://zapxkill.github.io/Dungeon-Games/Record",
   "private": true,
   "version": "0.0.1",
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "dev": "vite"
+    "dev": "vite",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
