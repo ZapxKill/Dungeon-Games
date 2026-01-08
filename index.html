@@ -1,16 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dungeon</title>
+    <link rel="stylesheet" href="css/homeStyles.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <section id="slide1" class="slide">
+        <div class="slide-content">
+            <div class="logo-container">
+                <img src="image/homePage/logo.png" alt="Logo" class="logo">
+            </div>
+            <button class="game-start-btn" onclick="scrollToSlide2()">
+                <img src="image/homePage/game_start_btn.png" alt="GameStart" class="btn-image">
+                <span class="btn-text">介紹</span>
+            </button>
+        </div>
+    </section>
+    <section id="slide2" class="slide">
+        <div class="slide-content">
+            <div class="game-description">
+                <h1>你一覺醒來，發現自己身處在一個地牢當中，雖然這是你第一次出現在此，但你對這個地方有著莫名的熟悉感。你必須探索這個地牢，解開謎團，找到逃脫的路徑。在探索著過程中，你發現這裡是個迷宮，你已經爬了一層又一層了，似乎還沒有要到頭的樣子，路上遭遇的戰鬥，使你疲倦不堪，開始迷失在這座地牢中。</h1>
+            </div>
+        </div>
+        <button class="game-start-btn" onclick="startGame()">
+            <img src="image/homePage/game_start_btn.png" alt="GameStart" class="btn-image">
+            <span class="btn-text">開始</span>
+        </button>
+    </section>
+    <script src="script/homePageScript.js"></script>
+</body>
+</html>
 
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Dungeon</title>
-      <script type="module" crossorigin src="/Dungeon-Games/recordPage/assets/index-9jxIoA_U.js"></script>
-      <link rel="stylesheet" crossorigin href="/Dungeon-Games/recordPage/assets/index-DDMG7Nff.css">
-    </head>
-
-    <body>
-      <div id="root"></div>
-    </body>
-  </html>
-  

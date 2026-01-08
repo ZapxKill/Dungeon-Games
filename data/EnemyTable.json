@@ -1,0 +1,80 @@
+[
+    {
+        "enemyID": "slime",
+        "enemyName": "史萊姆",
+        "description": "A weak and common monster.",
+        "image": "image/enemies/slime.png",
+        "attribute":{
+            "health": 30,
+            "damage": 7,
+            "defense": 2
+        },
+        "attributeLevelUp":{
+            "health": 2,
+            "damage": 1,
+            "defense": 1
+        },
+        "lootTable": [
+            {
+                "itemID": "heal_posion_s",
+                "dropRate": 0.5
+            },
+            {
+                "itemID": "stamina_posion_s",
+                "dropRate": 0.3
+            }
+        ]
+    },
+    {
+        "enemyID": "ruin_bat",
+        "enemyName": "廢墟蝙蝠",
+        "description": "隱匿於崩塌石樑間的夜行生物，尖銳的鳴叫聲在空曠廢墟中迴盪。",
+        "image": "image/enemies/ruin_bat.png",
+        "attribute": {
+            "health": 25,
+            "damage": 9,
+            "defense": 1
+        },
+        "attributeLevelUp": {
+            "health": 3,
+            "damage": 2,
+            "defense": 1
+        },
+        "lootTable": [
+            {
+                "itemID": "stamina_posion_s",
+                "dropRate": 0.4
+            },
+            {
+                "itemID": "heal_posion_s",
+                "dropRate": 0.2
+            }
+        ]
+    },
+    {
+        "enemyID": "skeleton",
+        "enemyName": "骷髏",
+        "description": "死在攀爬途中的挑戰者遺骸，即便靈魂消散，枯骨仍受迷宮魔力驅使而移動。",
+        "image": "image/enemies/skeleton.png",
+        "attribute": {
+            "health": 20,
+            "damage": 13,
+            "defense": 6
+        },
+        "attributeLevelUp": {
+            "health": 2,
+            "damage": 2,
+            "defense": 2
+        },
+        "lootTable": [
+            {
+                "itemID": "heal_posion_m",
+                "dropRate": 0.25
+            },
+            {
+                "itemID": "mp_posion_s",
+                "dropRate": 0.3
+            }
+        ]
+    }
+]

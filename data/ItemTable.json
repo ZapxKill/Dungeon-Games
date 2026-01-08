@@ -1,0 +1,146 @@
+[
+    {
+        "itemID": "heal_posion_s",
+        "usage": "player_stats_item",
+        "itemName":"治療藥水 小",
+        "image": "image/items/potion_hp_s.png",
+        "hImage": "image/items/potion_hp_s_sel.png",
+        "cImage": "image/items/potion_hp_s_cli.png",
+        "description": "治療 10 血量",
+        "amount": 0,
+        "stats":
+        {
+            "health": 10,
+            "stamina": 0,
+            "mp": 0
+        }
+    },
+    {
+        "itemID": "stamina_posion_s",
+        "usage": "player_stats_item",
+        "itemName":"體力藥水 小",
+        "image": "image/items/potion_sp_s.png",
+        "hImage": "image/items/potion_sp_s_sel.png",
+        "cImage": "image/items/potion_sp_s_cli.png",
+        "description": "回復 10 體力",
+        "amount": 0,
+        "stats":
+        {
+            "health": 0,
+            "stamina": 10,
+            "mp": 0
+        }
+    },
+    {
+        "itemID": "mp_posion_s",
+        "usage": "player_stats_item",
+        "itemName":"魔力藥水 小",
+        "image": "image/items/potion_mp_s.png",
+        "hImage": "image/items/potion_mp_s_sel.png",
+        "cImage": "image/items/potion_mp_s_cli.png",
+        "description": "回復 10 魔力",
+        "amount": 0,
+        "stats":
+        {
+            "health": 0,
+            "stamina": 0,
+            "mp": 10
+        }
+    },
+    {
+        "itemID": "heal_posion_m",
+        "usage": "player_stats_item",
+        "itemName":"治療藥水 中",
+        "image": "image/items/potion_hp_m.png",
+        "hImage": "image/items/potion_hp_m_sel.png",
+        "cImage": "image/items/potion_hp_m_cli.png",
+        "description": "治療 20 血量",
+        "amount": 0,
+        "stats":
+        {
+            "health": 20,
+            "stamina": 0,
+            "mp": 0
+        }
+    },
+    {
+        "itemID": "stamina_posion_m",
+        "usage": "player_stats_item",
+        "itemName":"體力藥水 中",
+        "image": "image/items/potion_sp_m.png",
+        "hImage": "image/items/potion_sp_m_sel.png",
+        "cImage": "image/items/potion_sp_m_cli.png",
+        "description": "回復 20 體力",
+        "amount": 0,
+        "stats":
+        {
+            "health": 0,
+            "stamina": 20,
+            "mp": 0
+        }
+    },
+    {
+        "itemID": "mp_posion_m",
+        "usage": "player_stats_item",
+        "itemName":"魔力藥水 中",
+        "image": "image/items/potion_mp_m.png",
+        "hImage": "image/items/potion_mp_m_sel.png",
+        "cImage": "image/items/potion_mp_m_cli.png",
+        "description": "回復 20 魔力",
+        "amount": 0,
+        "stats":
+        {
+            "health": 0,
+            "stamina": 0,
+            "mp": 20
+        }
+    },
+    {
+        "itemID": "heal_posion_L",
+        "usage": "player_stats_item",
+        "itemName":"治療藥水 大",
+        "image": "image/items/potion_hp_L.png",
+        "hImage": "image/items/potion_hp_L_sel.png",
+        "cImage": "image/items/potion_hp_L_cli.png",
+        "description": "治療 30 血量",
+        "amount": 0,
+        "stats":
+        {
+            "health": 30,
+            "stamina": 0,
+            "mp": 0
+        }
+    },
+    {
+        "itemID": "stamina_posion_L",
+        "usage": "player_stats_item",
+        "itemName":"體力藥水 大",
+        "image": "image/items/potion_sp_L.png",
+        "hImage": "image/items/potion_sp_L_sel.png",
+        "cImage": "image/items/potion_sp_L_cli.png",
+        "description": "回復 30 體力",
+        "amount": 0,
+        "stats":
+        {
+            "health": 0,
+            "stamina": 30,
+            "mp": 0
+        }
+    },
+    {
+        "itemID": "mp_posion_L",
+        "usage": "player_stats_item",
+        "itemName":"魔力藥水 大",
+        "image": "image/items/potion_mp_L.png",
+        "hImage": "image/items/potion_mp_L_sel.png",
+        "cImage": "image/items/potion_mp_L_cli.png",
+        "description": "回復 30 魔力",
+        "amount": 0,
+        "stats":
+        {
+            "health": 0,
+            "stamina": 0,
+            "mp": 30
+        }
+    }
+]
